@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.Assert.assertEquals;
 import static org.yandex.prakrikum.pageObject.constants.HomePageConstants.*;
 
@@ -51,8 +53,8 @@ public class HomePageTest {
 
     @Test
     public void checkQuestion() {
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         HomePage objHomePage = new HomePage(driver);
-        objHomePage.waitLoadHomePage();
         objHomePage.scrollToQuewstion();
         objHomePage.clickQuestion(question);
 

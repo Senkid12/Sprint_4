@@ -11,30 +11,24 @@ import static org.yandex.prakrikum.pageObject.constants.ScooterColors.*;
 
 public class PageAboutScooter {
     WebDriver driver;
-    //    Шапка страницы со самоката
-    private final By pageAboutScooterHeader = By.className("Header_Header__214zg");
     //    Поле с датой привоза самоката
-    private final By fieldDateForOrder = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[1]/div[1]/div/input");
+    private final By fieldDateForOrder = By.xpath(".//div[@class='react-datepicker__input-container']/input");
     //    Поле со сроком аренды
     private final By fieldRentalPeriod = By.xpath(".//span[@class='Dropdown-arrow']");
     //    Чекбоксы с цветом самоката
     private final By blackColor = By.id("black");
     private final By greyColor = By.id("grey");
     // Поле с комментарием
-    private final By commentForOrder = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[4]/input");
+    private final By commentForOrder = By.xpath(".//div[@class='Order_Form__17u6u']/div[@class='Input_InputContainer__3NykH']/input");
     // Кнопка "Заказать"
-    private final  By orderButton = By.xpath("//*[@id=\"root\"]/div/div[2]/div[3]/button[2]");
+    private final  By orderButton = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']");
     // кнопка подтверждения заказа
-    private final By orderConfirmation = By.xpath("//*[@id=\"root\"]/div/div[2]/div[5]/div[2]/button[2]");
+    private final By orderConfirmation = By.xpath(".//div[@class='Order_Modal__YZ-d3']/div[@class='Order_Buttons__1xGrp']/button[2]");
 //    всплывающее окно после подтверждения заказа
     private final By popUpWindowAfterOrder = By.xpath("/html/body/div/div/div[2]/div[5]");
 
     public PageAboutScooter(WebDriver driver) {
         this.driver = driver;
-    }
-    //Метод ожидания загрузки страницы
-    public void waitLoadScooterPage() {
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(driver -> (driver.findElement(pageAboutScooterHeader).getText() != null && !driver.findElement(pageAboutScooterHeader).getText().isEmpty()));
     }
 
     //    Метод заполнения формы "про аренду"

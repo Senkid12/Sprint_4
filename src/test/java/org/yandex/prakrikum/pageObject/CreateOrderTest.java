@@ -7,8 +7,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertTrue;
 import static org.yandex.prakrikum.pageObject.constants.OrderButtonsConstants.*;
@@ -57,8 +58,6 @@ public class CreateOrderTest {
         };
     }
 
-
-
     @Before
     public void startUp() {
 
@@ -68,21 +67,21 @@ public class CreateOrderTest {
     }
     @Test
     public void testCreateOrder() {
+        // Добавил неявное ожидание
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         HomePage objHomePage = new HomePage(driver);
-        objHomePage.waitLoadHomePage();
         objHomePage.clickOrderCreateButton(button);
 
         PageAboutCustomer objPageAboutCustomer = new PageAboutCustomer(driver);
-        objPageAboutCustomer.waitLoadCusomerPage();
         objPageAboutCustomer.inputFormAboutCustomer(name, surname, address, metro, phoneNumber);
         objPageAboutCustomer.clickNextButton();
 
         PageAboutScooter objPageAboutScooter = new PageAboutScooter(driver);
-        objPageAboutScooter.waitLoadScooterPage();
         objPageAboutScooter.inputRentalForm(date, rentalPeriod, color, comment);
         objPageAboutScooter.clickOrderButton();
         objPageAboutScooter.clickOrderConfirm();
-        assertTrue("Ожидамый результат = " + expectedStatusOrder + ".Фактический = " + objPageAboutScooter.getPopUpWindowAfterOrder() + "!",objPageAboutScooter.getPopUpWindowAfterOrder().contains(expectedStatusOrder));
+        // Согласен тут не подумал). Исправляю
+        assertTrue(objPageAboutScooter.getPopUpWindowAfterOrder().contains(expectedStatusOrder));
     }
 
     @After
